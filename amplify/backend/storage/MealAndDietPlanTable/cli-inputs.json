@@ -1,0 +1,10 @@
+{
+  "resourceName": "MealAndDietPlanTable",
+  "tableName": "MealAndDietPlanTable",
+  "partitionKey": {
+    "fieldName": "planId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
