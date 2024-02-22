@@ -1,9 +1,9 @@
+import Background from '@/components/background'
 import { Amplify } from 'aws-amplify'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import awsExports from '../aws-exports'
 import './globals.css'
-import Background from '@/components/background'
 
 Amplify.configure(awsExports)
 
