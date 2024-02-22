@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-fitlife-dev-154852-authRole",
+      "UnauthRoleArn": "arn:aws:iam::058264332347:role/amplify-fitlife-dev-154852-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::058264332347:role/amplify-fitlife-dev-154852-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-fitlife-dev-154852-deployment",
+      "UnauthRoleName": "amplify-fitlife-dev-154852-unauthRole",
+      "StackName": "amplify-fitlife-dev-154852",
+      "StackId": "arn:aws:cloudformation:us-east-1:058264332347:stack/amplify-fitlife-dev-154852/98069930-d167-11ee-af44-1203c9be2189",
+      "AmplifyAppId": "drbdrsytjtsi6"
+    }
+  }
+}
