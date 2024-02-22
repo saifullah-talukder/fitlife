@@ -57,7 +57,9 @@ export default function App(props: AppProps) {
       <div className="flex gap-x-4 items-center justify-center">
         <img src="./images/fitness.png" className="size-10" alt="" />
         <h1 className="text-center text-3xl font-semibold text-slate-700">
-          Welcome to fitlife, <span className="text-slate-500 text-2xl px-2">{user.email}</span>
+          Welcome to <span className="text-fuchsia-600">FitLife</span>
+          {', '}
+          <span className="text-slate-500 text-2xl px-2">{user.email}</span>
         </h1>
       </div>
 
