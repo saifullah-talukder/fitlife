@@ -10,6 +10,11 @@
       "StackName": "amplify-fitlife-dev-154852",
       "StackId": "arn:aws:cloudformation:us-east-1:058264332347:stack/amplify-fitlife-dev-154852/98069930-d167-11ee-af44-1203c9be2189",
       "AmplifyAppId": "drbdrsytjtsi6"
+    },
+    "categories": {
+      "auth": {
+        "fitlife2880cd9a": {}
+      }
     }
   }
 }
