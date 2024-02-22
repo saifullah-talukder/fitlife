@@ -22,7 +22,9 @@ export default function FitnessGoal(props: FitnessGoalProps) {
     return isDisabled
   }, [params])
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => {
+    console.log(JSON.stringify(params))
+  }
 
   return (
     <div className={twMerge('w-full relative', props.className)}>

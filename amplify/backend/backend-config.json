@@ -1,4 +1,20 @@
 {
+  "api": {
+    "CreateMealAndDietPlanAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "CreateMealAndDietPlan"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "fitlife2880cd9a": {
       "customAuth": false,
@@ -46,6 +62,24 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_CreateMealAndDietPlan_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateMealAndDietPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateMealAndDietPlan_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateMealAndDietPlan"
+        }
+      ]
     }
   },
   "storage": {

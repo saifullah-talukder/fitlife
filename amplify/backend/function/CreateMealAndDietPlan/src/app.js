@@ -60,10 +60,6 @@ const convertUrlType = (param, type) => {
   }
 }
 
-/************************************
- * HTTP Get method to list objects *
- ************************************/
-
 app.get(path, async function (req, res) {
   var params = {
     TableName: tableName,
@@ -163,32 +159,10 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, async function (req, res) 
 })
 
 /************************************
- * HTTP put method for insert object *
- *************************************/
-
-app.put(path, async function (req, res) {
-  if (userIdPresent) {
-    req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH
-  }
-
-  let putItemParams = {
-    TableName: tableName,
-    Item: req.body,
-  }
-  try {
-    let data = await ddbDocClient.send(new PutCommand(putItemParams))
-    res.json({ success: 'put call succeed!', url: req.url, data: data })
-  } catch (err) {
-    res.statusCode = 500
-    res.json({ error: err, url: req.url, body: req.body })
-  }
-})
-
-/************************************
  * HTTP post method for insert object *
  *************************************/
 
-app.post(path, async function (req, res) {
+app.post('/plan/new', async function (req, res) {
   if (userIdPresent) {
     req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH
   }

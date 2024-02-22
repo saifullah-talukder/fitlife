@@ -9,14 +9,24 @@
       "UnauthRoleName": "amplify-fitlife-dev-154852-unauthRole",
       "StackName": "amplify-fitlife-dev-154852",
       "StackId": "arn:aws:cloudformation:us-east-1:058264332347:stack/amplify-fitlife-dev-154852/98069930-d167-11ee-af44-1203c9be2189",
-      "AmplifyAppId": "drbdrsytjtsi6"
+      "AmplifyAppId": "drbdrsytjtsi6",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-fitlife-dev-154852-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "fitlife2880cd9a": {}
       },
       "function": {
-        "CreateMealAndDietPlan": {}
+        "CreateMealAndDietPlan": {
+          "deploymentBucketName": "amplify-fitlife-dev-154852-deployment",
+          "s3Key": "amplify-builds/CreateMealAndDietPlan-69674245626170567156-build.zip"
+        }
+      },
+      "storage": {
+        "MealAndDietPlanTable": {}
+      },
+      "api": {
+        "CreateMealAndDietPlanAPI": {}
       }
     }
   }
