@@ -1,10 +1,11 @@
 'use client'
 
+import App from '@/components/app'
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
-import awsExports from '../aws-exports'
 import { Amplify } from 'aws-amplify'
-import CreateNewPlan from '@/components/createNewPlan'
+import awsExports from '../aws-exports'
+import { useUserInfoStore } from '@/stores/useUserInfoStore'
 Amplify.configure(awsExports)
 
 const formFields = {
@@ -26,7 +27,7 @@ const components = {
 export default function Home() {
   return (
     <Authenticator components={components} formFields={formFields}>
-      {({ user, signOut }) => <CreateNewPlan user={user} signOut={signOut} />}
+      {({ user, signOut }) => <App user={user} signOut={signOut} />}
     </Authenticator>
   )
 }

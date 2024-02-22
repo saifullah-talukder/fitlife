@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import awsExports from '../aws-exports'
 import './globals.css'
+import Background from '@/components/background'
 
 Amplify.configure(awsExports)
 
@@ -20,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <link rel="icon" href="/images/fitness.png" sizes="any" />
+        <main className="relative min-h-screen w-full bg-white">
+          <Background />
+          <div className="relative">{children}</div>
+        </main>
+      </body>
     </html>
   )
 }
