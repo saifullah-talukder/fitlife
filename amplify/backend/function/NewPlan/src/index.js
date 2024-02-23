@@ -48,7 +48,7 @@ exports.handler = async (event, context) => {
       userId,
       params,
       plan: { meal: mealPlan, workout: workoutPlan },
-      createdAt: string(new Date()),
+      createdAt: String(new Date()),
     }
 
     const putItemParams = {
@@ -74,7 +74,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ params, error: err }),
+      body: JSON.stringify({ params, error: String(err) }),
     }
   }
 }

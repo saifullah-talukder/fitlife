@@ -34,7 +34,7 @@ export default function FitnessGoal(props: FitnessGoalProps) {
       userId: user.userId,
       params,
     })
-      .then((res: any) => setNewPlanResponse(res))
+      .then((res: any) => setNewPlanResponse(res.data))
       .catch((err: any) => setError(String(err)))
       .finally(() => setIsLoading(false))
   }

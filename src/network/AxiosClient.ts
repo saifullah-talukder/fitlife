@@ -14,7 +14,6 @@ const onRequest = async (request: any) => {
 }
 
 const onRequestError = (error: any) => {
-  console.log(`Axios request interceptor error`, error)
   return Promise.reject(error)
 }
 

@@ -21,7 +21,7 @@ async function getMessage(input) {
     })
     return response?.choices[0]?.message?.content
   } catch (err) {
-    throw new Error(`OpenAI error. Error: ${string(err)}`)
+    throw new Error(`OpenAI API error. Error: ${String(err)}`)
   }
 }
 
