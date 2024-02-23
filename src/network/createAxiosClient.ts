@@ -6,7 +6,7 @@ export function createAxiosClient(tokens: any) {
 
   const interceptor = aws4Interceptor({
     options: {
-      region: process.env.AWS_REGION,
+      region: process.env.CLOUD_REGION,
       service: 'execute-api',
     },
     credentials: {
