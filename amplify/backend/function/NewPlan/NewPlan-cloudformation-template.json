@@ -15,14 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "storageMealAndDietPlanTableName": {
-      "Type": "String",
-      "Default": "storageMealAndDietPlanTableName"
-    },
-    "storageMealAndDietPlanTableArn": {
-      "Type": "String",
-      "Default": "storageMealAndDietPlanTableArn"
     }
   },
   "Conditions": {
@@ -55,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "CreateMealAndDietPlan",
+            "NewPlan",
             {
               "Fn::Join": [
                 "",
                 [
-                  "CreateMealAndDietPlan",
+                  "NewPlan",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "fitlifeLambdaRole19cb52a8",
+            "fitlifeLambdaRolefc6abb77",
             {
               "Fn::Join": [
                 "",
                 [
-                  "fitlifeLambdaRole19cb52a8",
+                  "fitlifeLambdaRolefc6abb77",
                   "-",
                   {
                     "Ref": "env"
@@ -168,34 +160,6 @@
                   }
                 ]
               }
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:DescribeTable",
-                "dynamodb:GetItem",
-                "dynamodb:Query",
-                "dynamodb:Scan",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem"
-              ],
-              "Resource": [
-                {
-                  "Ref": "storageMealAndDietPlanTableArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageMealAndDietPlanTableArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }

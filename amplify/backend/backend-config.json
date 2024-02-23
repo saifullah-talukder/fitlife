@@ -1,6 +1,6 @@
 {
   "api": {
-    "CreateMealAndDietPlanAPI": {
+    "newapi": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "CreateMealAndDietPlan"
+          "resourceName": "NewPlan"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -44,7 +44,7 @@
     }
   },
   "function": {
-    "CreateMealAndDietPlan": {
+    "NewPlan": {
       "build": true,
       "dependsOn": [
         {
@@ -65,19 +65,19 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_CreateMealAndDietPlan_deploymentBucketName": {
+    "AMPLIFY_function_NewPlan_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "CreateMealAndDietPlan"
+          "resourceName": "NewPlan"
         }
       ]
     },
-    "AMPLIFY_function_CreateMealAndDietPlan_s3Key": {
+    "AMPLIFY_function_NewPlan_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "CreateMealAndDietPlan"
+          "resourceName": "NewPlan"
         }
       ]
     }

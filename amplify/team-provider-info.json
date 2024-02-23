@@ -16,17 +16,17 @@
       "auth": {
         "fitlife2880cd9a": {}
       },
-      "function": {
-        "CreateMealAndDietPlan": {
-          "deploymentBucketName": "amplify-fitlife-dev-154852-deployment",
-          "s3Key": "amplify-builds/CreateMealAndDietPlan-69674245626170567156-build.zip"
-        }
-      },
       "storage": {
         "MealAndDietPlanTable": {}
       },
+      "function": {
+        "NewPlan": {
+          "deploymentBucketName": "amplify-fitlife-dev-154852-deployment",
+          "s3Key": "amplify-builds/NewPlan-356446524e5052507152-build.zip"
+        }
+      },
       "api": {
-        "CreateMealAndDietPlanAPI": {}
+        "newapi": {}
       }
     }
   }

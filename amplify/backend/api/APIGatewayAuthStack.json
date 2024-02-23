@@ -11,7 +11,7 @@
     "env": {
       "Type": "String"
     },
-    "CreateMealAndDietPlanAPI": {
+    "newapi": {
       "Type": "String"
     }
   },
@@ -52,7 +52,7 @@
                       },
                       ":",
                       {
-                        "Ref": "CreateMealAndDietPlanAPI"
+                        "Ref": "newapi"
                       },
                       "/",
                       {
@@ -64,7 +64,7 @@
                           }
                         ]
                       },
-                      "/*/plan/new/*"
+                      "/PUT/test/*"
                     ]
                   ]
                 },
@@ -82,7 +82,7 @@
                       },
                       ":",
                       {
-                        "Ref": "CreateMealAndDietPlanAPI"
+                        "Ref": "newapi"
                       },
                       "/",
                       {
@@ -94,7 +94,7 @@
                           }
                         ]
                       },
-                      "/*/plan/new"
+                      "/PUT/test"
                     ]
                   ]
                 },
@@ -112,7 +112,7 @@
                       },
                       ":",
                       {
-                        "Ref": "CreateMealAndDietPlanAPI"
+                        "Ref": "newapi"
                       },
                       "/",
                       {
@@ -124,7 +124,7 @@
                           }
                         ]
                       },
-                      "/*/plan/list/*"
+                      "/PATCH/test/*"
                     ]
                   ]
                 },
@@ -142,7 +142,7 @@
                       },
                       ":",
                       {
-                        "Ref": "CreateMealAndDietPlanAPI"
+                        "Ref": "newapi"
                       },
                       "/",
                       {
@@ -154,7 +154,7 @@
                           }
                         ]
                       },
-                      "/*/plan/list"
+                      "/PATCH/test"
                     ]
                   ]
                 }
