@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "paths": {
+    "/plan/new": {
+      "name": "/plan/new",
+      "lambdaFunction": "newPlan",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "update"
+        ]
+      }
+    }
+  }
+}

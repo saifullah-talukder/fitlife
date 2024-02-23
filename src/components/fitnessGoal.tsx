@@ -1,5 +1,8 @@
 import { activityLevelItems, goalItems } from '@/constants/app'
+import { createAxiosClient } from '@/network/createAxiosClient'
 import { NewPlanParams, useCreateNewPlanStore } from '@/stores/useCreateNewPlanStore'
+import { useUserInfoStore } from '@/stores/useUserInfoStore'
+import * as Auth from 'aws-amplify/auth'
 import { HTMLAttributes, useMemo } from 'react'
 import { MdDoneAll } from 'react-icons/md'
 import { twMerge } from 'tailwind-merge'
@@ -11,6 +14,7 @@ type FitnessGoalProps = {} & HTMLAttributes<HTMLDivElement>
 
 export default function FitnessGoal(props: FitnessGoalProps) {
   const { params, setNewPlanParam } = useCreateNewPlanStore()
+  const { user } = useUserInfoStore()
 
   const isDisabled = useMemo(() => {
     let isDisabled = false
@@ -22,8 +26,17 @@ export default function FitnessGoal(props: FitnessGoalProps) {
     return isDisabled
   }, [params])
 
-  const handleSubmit = () => {
-    console.log(JSON.stringify(params))
+  const handleSubmit = async () => {
+    // console.log(JSON.stringify(params))
+    const tokens = await Auth.fetchAuthSession()
+    // console.log(tokens)
+    const AxiosClient = createAxiosClient(tokens)
+    AxiosClient.post(process.env.NEW_PLAN_API_URL!, {
+      userId: user.userId,
+      params,
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
 
   return (

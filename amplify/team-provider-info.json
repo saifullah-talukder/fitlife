@@ -17,7 +17,16 @@
         "fitlife2880cd9a": {}
       },
       "function": {
-        "newPlan": {}
+        "newPlan": {
+          "deploymentBucketName": "amplify-fitlife-dev-154852-deployment",
+          "s3Key": "amplify-builds/newPlan-595639786a4a33534f71-build.zip"
+        }
+      },
+      "storage": {
+        "planStorage": {}
+      },
+      "api": {
+        "newPlanApi": {}
       }
     }
   }

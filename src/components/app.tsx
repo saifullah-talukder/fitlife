@@ -7,7 +7,6 @@ import { SecondaryActionButton } from './button'
 import CreateNewPlan from './createNewPlan'
 import History from './history'
 import TabMenu from './tabMenu'
-import * as Auth from 'aws-amplify/auth'
 
 type AppProps = {
   signOut?: UseAuthenticator['signOut']
@@ -31,12 +30,12 @@ export default function App(props: AppProps) {
   const [activeTabId, setActiveTabId] = useState<TabID>('create-new-plan')
   const { user, setUserInfo } = useUserInfoStore()
 
-  const printToken = async () => {
-    const token = await Auth.fetchAuthSession()
-    console.log(token.tokens?.accessToken.toString())
-  }
+  // const printToken = async () => {
+  //   const token = await Auth.fetchAuthSession()
+  //   console.log(token)
+  // }
 
-  printToken()
+  // printToken()
 
   useEffect(() => {
     if (props.user?.signInDetails?.loginId) {
