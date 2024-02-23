@@ -19,7 +19,9 @@ export default function History(props: HistoryProps) {
       <div className="flex justify-between items-center">
         {!!isLoading && <p className="text-slate-700">Loading... please wait!</p>}
         {!!error && <p className="text-red-500">Failed to load your plans. Please try again later!</p>}
-        {!isLoading && !error && <p className="text-slate-700">{`You have made ${plans?.length} plans so far!`}</p>}
+        {!isLoading && !error && (
+          <p className="text-slate-700 text-sm md:text-base">{`You have made ${plans?.length} plans so far!`}</p>
+        )}
         <PrimaryActionButton
           label="Refresh"
           iconLeft={<IoMdRefresh size={18} />}

@@ -6,7 +6,7 @@ import { useUserInfoStore } from '@/stores/useUserInfoStore'
 import { HTMLAttributes, useMemo, useState } from 'react'
 import { MdDoneAll } from 'react-icons/md'
 import { twMerge } from 'tailwind-merge'
-import { string, z } from 'zod'
+import { z } from 'zod'
 import { PrimaryActionButton } from './button'
 import { SelectInputField, TextInputField } from './form'
 
@@ -42,7 +42,7 @@ export default function FitnessGoal(props: FitnessGoalProps) {
   return (
     <div className={twMerge('w-full relative', props.className)}>
       <h2 className="text-slate-700 font-medium">{`Your Goal`}</h2>
-      <div className="mt-2 grid grid-cols-1 gap-4">
+      <div className="mt-3 grid grid-cols-1 gap-4">
         <SelectInputField
           label="Goal"
           items={goalItems}
@@ -74,15 +74,16 @@ export default function FitnessGoal(props: FitnessGoalProps) {
           onTextChange={text => setNewPlanParam('pastFailureReason', text)}
           size="md"
         />
-        <PrimaryActionButton
-          className="absolute bottom-0 w-full"
-          iconLeft={<MdDoneAll size={18} />}
-          label="Submit"
-          onClick={() => handleSubmit()}
-          isDisabled={isDisabled}
-          isLoading={isLoading}
-        />
       </div>
+      <div className="h-14 md:hidden"></div>
+      <PrimaryActionButton
+        className="absolute bottom-0 w-full"
+        iconLeft={<MdDoneAll size={18} />}
+        label="Submit"
+        onClick={() => handleSubmit()}
+        isDisabled={isDisabled}
+        isLoading={isLoading}
+      />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { NewPlanResponse } from '@/stores/useNewPlanResponseStore'
 import { differenceInYears, format } from 'date-fns'
 import { capitalize } from 'lodash'
@@ -16,7 +17,7 @@ export function PlanCardDetails(props: PlanCardProps) {
   return (
     <div
       className={twMerge(
-        'mt-4 w-full grid grid-cols-3 gap-4 border border-fuchsia-300 p-4 rounded-lg',
+        'mt-4 w-full grid grid-cols-1 md:grid-cols-3 gap-4 border border-fuchsia-300 p-4 rounded-lg',
         props.className
       )}
     >
@@ -42,19 +43,21 @@ export function PlanCardDetails(props: PlanCardProps) {
         <h2 className="font-medium text-slate-700 text-opacity-70">Your Workout Recommendation</h2>
         <div className="mt-2 space-y-2">{stringToHtml(props.plan.plan.workout!)}</div>
       </div>
+      <div className="h-10"></div>
     </div>
   )
 }
 
 export function PlanCardSmall(props: PlanCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
-  //<PlanCardDetails {...props} />
+  const { width } = useWindowSize()
+
   return (
     <div className={twMerge('relative w-full', props.className)}>
       {isExpanded ? (
         <PlanCardDetails {...props} />
       ) : (
-        <div className="mt-4 w-full grid grid-cols-3 gap-4 border border-fuchsia-300 p-4 rounded-lg">
+        <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-3 gap-4 border border-fuchsia-300 p-4 rounded-lg">
           <div className="space-y-4">
             <LabeledInformation label="Requested At" value={getFormattedTimeString(props.plan.createdAt)} />
             <LabeledInformation
@@ -78,6 +81,7 @@ export function PlanCardSmall(props: PlanCardProps) {
             <p className="mt-2 text-sm text-slate-700">{getFirstParagraph(props.plan.plan.workout!)}</p>
             <span className="text-sm text-slate-700 font-semibold">expand for details.....</span>
           </div>
+          <div className="h-10"></div>
         </div>
       )}
 

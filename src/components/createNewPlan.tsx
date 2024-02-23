@@ -24,7 +24,7 @@ export default function CreateNewPlan(props: CreateNewPlanProps) {
           <PrimaryActionButton className="absolute right-0 bottom-0" label="Make Another Plan" onClick={setEmpty} />
         </div>
       ) : (
-        <div className={twMerge('grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 pt-4', props.className)}>
+        <div className={twMerge('grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 pt-4 gap-4', props.className)}>
           <PersonalInfo />
           <div className="hidden xl:block"></div>
           <FitnessGoal />
