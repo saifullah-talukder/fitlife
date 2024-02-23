@@ -9,6 +9,7 @@ import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
 import { PrimaryActionButton } from './button'
 import { SelectInputField, TextInputField } from './form'
+import { AxiosClient } from '@/network/AxiosClient'
 
 type FitnessGoalProps = {} & HTMLAttributes<HTMLDivElement>
 
@@ -29,8 +30,8 @@ export default function FitnessGoal(props: FitnessGoalProps) {
   const handleSubmit = async () => {
     // console.log(JSON.stringify(params))
     const tokens = await Auth.fetchAuthSession()
-    // console.log(tokens)
-    const AxiosClient = createAxiosClient(tokens)
+    console.log(tokens?.tokens?.accessToken.toString())
+    // const AxiosClient = createAxiosClient(tokens)
     AxiosClient.post(process.env.NEW_PLAN_API_URL!, {
       userId: user.userId,
       params,
@@ -39,7 +40,15 @@ export default function FitnessGoal(props: FitnessGoalProps) {
       .catch(err => console.log(err))
   }
 
-  console.log(JSON.stringify(params))
+  const printToken = async () => {
+    // console.log(JSON.stringify(params))
+    const tokens = await Auth.fetchAuthSession()
+    // console.log(tokens?.tokens?.accessToken.toString())
+    console.log(tokens)
+    console.log(tokens?.tokens?.idToken?.toString())
+  }
+
+  printToken()
 
   return (
     <div className={twMerge('w-full relative', props.className)}>

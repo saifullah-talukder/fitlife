@@ -14,9 +14,15 @@ if (process.env.ENV && process.env.ENV !== 'NONE') {
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 exports.handler = async (event, context) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
+  }
+
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 400,
+      headers,
       body: JSON.stringify('HTTP method not allowed'),
     }
   }
@@ -24,6 +30,7 @@ exports.handler = async (event, context) => {
   if (event.path !== '/plan/new') {
     return {
       statusCode: 400,
+      headers,
       body: JSON.stringify('Resource path not allowed'),
     }
   }
@@ -50,11 +57,7 @@ exports.handler = async (event, context) => {
 
   return {
     statusCode,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  },
+    headers,
     body: JSON.stringify(result),
   }
 }
