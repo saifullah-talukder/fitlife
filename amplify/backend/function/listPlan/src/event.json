@@ -1,0 +1,10 @@
+{
+  "httpMethod": "GET",
+  "path": "/plan/list",
+  "queryStringParameters": {
+    "userId": "14e84418-5041-703b-4411-451b26662fb5"
+  },
+  "headers": {
+    "Content-Type": "application/json"
+  }
+}

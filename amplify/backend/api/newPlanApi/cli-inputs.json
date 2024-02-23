@@ -10,6 +10,16 @@
           "update"
         ]
       }
+    },
+    "/plan/list": {
+      "name": "/plan/list",
+      "lambdaFunction": "listPlan",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "read"
+        ]
+      }
     }
   }
 }

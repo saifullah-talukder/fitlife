@@ -1,3 +1,4 @@
+import { AxiosClient } from '@/network/AxiosClient'
 import { useUserInfoStore } from '@/stores/useUserInfoStore'
 import { UseAuthenticator } from '@aws-amplify/ui-react-core'
 import { AuthUser } from 'aws-amplify/auth'
@@ -29,6 +30,14 @@ const tabItems = [
 export default function App(props: AppProps) {
   const [activeTabId, setActiveTabId] = useState<TabID>('create-new-plan')
   const { user, setUserInfo } = useUserInfoStore()
+  const [isHistoryLoading, setIsHistoryLoading] = useState(false)
+  const [historyError, setHistoryError] = useState('')
+  const [plans, setPlans] = useState([])
+  const [fetchFlag, setFetchFlag] = useState(0)
+
+  useEffect(() => {
+    fetchPlans()
+  }, [fetchFlag])
 
   useEffect(() => {
     if (props.user?.signInDetails?.loginId) {
@@ -41,6 +50,14 @@ export default function App(props: AppProps) {
       setUserInfo('username', props.user?.username)
     }
   }, [props.user])
+
+  const fetchPlans = async () => {
+    setIsHistoryLoading(true)
+    AxiosClient.get(`${process.env.PLAN_API_URL}/list?userId=${user.userId}`)
+      .then((res: any) => setPlans(res.data.plans.reverse()))
+      .catch((err: any) => setHistoryError(String(err)))
+      .finally(() => setIsHistoryLoading(false))
+  }
 
   return (
     <div className="relative pt-6">
@@ -70,7 +87,11 @@ export default function App(props: AppProps) {
 
       <div className="mt-4 mx-4 md:mx-20 lg:mx-40 xl:mx-60 rounded-xl bg-white p-4">
         <TabMenu activeTabId={activeTabId} items={tabItems} onTabClick={tabId => setActiveTabId(tabId)} />
-        {activeTabId === 'create-new-plan' ? <CreateNewPlan /> : <History />}
+        {activeTabId === 'create-new-plan' ? (
+          <CreateNewPlan />
+        ) : (
+          <History setFetchFlag={setFetchFlag} plans={plans} isLoading={isHistoryLoading} error={historyError} />
+        )}
       </div>
       <div className="h-4"></div>
     </div>

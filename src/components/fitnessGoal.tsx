@@ -30,7 +30,7 @@ export default function FitnessGoal(props: FitnessGoalProps) {
 
   const handleSubmit = async () => {
     setIsLoading(true)
-    AxiosClient.post(process.env.NEW_PLAN_API_URL!, {
+    AxiosClient.post(`${process.env.PLAN_API_URL}/new`, {
       userId: user.userId,
       params,
     })
