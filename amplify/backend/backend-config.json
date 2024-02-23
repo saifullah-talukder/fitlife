@@ -1,20 +1,5 @@
 {
-  "api": {
-    "newapi": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "NewPlan"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
+  "api": {},
   "auth": {
     "fitlife2880cd9a": {
       "customAuth": false,
@@ -44,7 +29,7 @@
     }
   },
   "function": {
-    "NewPlan": {
+    "newPlan": {
       "build": true,
       "dependsOn": [
         {
@@ -57,33 +42,15 @@
             "Arn"
           ],
           "category": "storage",
-          "resourceName": "MealAndDietPlanTable"
+          "resourceName": "planStorage"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
-  "parameters": {
-    "AMPLIFY_function_NewPlan_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "NewPlan"
-        }
-      ]
-    },
-    "AMPLIFY_function_NewPlan_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "NewPlan"
-        }
-      ]
-    }
-  },
   "storage": {
-    "MealAndDietPlanTable": {
+    "planStorage": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

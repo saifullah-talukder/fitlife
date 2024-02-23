@@ -16,17 +16,8 @@
       "auth": {
         "fitlife2880cd9a": {}
       },
-      "storage": {
-        "MealAndDietPlanTable": {}
-      },
       "function": {
-        "NewPlan": {
-          "deploymentBucketName": "amplify-fitlife-dev-154852-deployment",
-          "s3Key": "amplify-builds/NewPlan-356446524e5052507152-build.zip"
-        }
-      },
-      "api": {
-        "newapi": {}
+        "newPlan": {}
       }
     }
   }

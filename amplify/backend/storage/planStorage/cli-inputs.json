@@ -1,0 +1,14 @@
+{
+  "resourceName": "planStorage",
+  "tableName": "planTable",
+  "partitionKey": {
+    "fieldName": "planId",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "userId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

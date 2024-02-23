@@ -1,30 +1,20 @@
-/* Amplify Params - DO NOT EDIT
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT */ /**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
-
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
-const {
-  DeleteCommand,
-  DynamoDBDocumentClient,
-  GetCommand,
-  PutCommand,
-  QueryCommand,
-  ScanCommand,
-} = require('@aws-sdk/lib-dynamodb')
+const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb')
 
 const ddbClient = new DynamoDBClient({ region: process.env.TABLE_REGION })
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient)
 
-let tableName = 'MealAndDietPlanTable'
+let tableName = 'planTable'
 if (process.env.ENV && process.env.ENV !== 'NONE') {
   tableName = tableName + '-' + process.env.ENV
 }
 
-exports.handler = async event => {
+/**
+ * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+ */
+exports.handler = async (event, context) => {
   console.log(`EVENT: ${JSON.stringify(event)}`)
+  console.log(`CONTEXT: ${JSON.stringify(context)}`)
   let result = { ...event, res: 'Hello from Lambda!' }
   let statusCode = 200
 
