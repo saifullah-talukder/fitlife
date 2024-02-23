@@ -20,7 +20,7 @@ type NewPlanStore = {
   setEmpty: () => void
 }
 
-const emptyParams: NewPlanParams = {
+export const emptyNewPlanParams: NewPlanParams = {
   birthDate: null,
   sex: null,
   country: '',
@@ -35,7 +35,7 @@ const emptyParams: NewPlanParams = {
 export const useCreateNewPlanStore = create<NewPlanStore>()(
   devtools(
     set => ({
-      params: emptyParams,
+      params: emptyNewPlanParams,
       setNewPlanParam: (key, value) =>
         set(state => {
           const updatedParams = { ...state.params, [key]: value }
@@ -44,9 +44,9 @@ export const useCreateNewPlanStore = create<NewPlanStore>()(
 
       setEmpty: () =>
         set(() => {
-          return { params: emptyParams }
+          return { params: emptyNewPlanParams }
         }),
     }),
-    { name: 'new-plan-store' }
+    { name: 'create-new-plan-store' }
   )
 )

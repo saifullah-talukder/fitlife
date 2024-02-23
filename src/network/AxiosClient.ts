@@ -8,7 +8,7 @@ const onRequest = async (request: any) => {
   if (tokens && tokens.idToken) {
     request.headers.Authorization = `${tokens.idToken.toString()}`
   } else {
-    // console.log('axios auth token not found', request.)
+    Promise.reject('auth token not found')
   }
   return request
 }
@@ -23,9 +23,7 @@ const onResponse = (response: any) => {
 }
 
 const onResponseError = async (error: any) => {
-  console.log(`API response error`, error)
   if (error.response.status === 401) {
-    console.log('FOUND 401 Error')
     window.location['pathname'] = '/'
   }
   return Promise.reject(error)

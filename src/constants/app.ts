@@ -12,8 +12,8 @@ export const goalItems: GoalSelectable[] = [
 ]
 
 export const activityLevelItems: ActivityLevelSelectable[] = [
-  { _id: 'very-light', name: 'Not Very Active' },
+  { _id: 'very light', name: 'Not Very Active' },
   { _id: 'light', name: 'Lightly Active' },
   { _id: 'active', name: 'Active' },
-  { _id: 'very-active', name: 'Very Active' },
+  { _id: 'very active', name: 'Very Active' },
 ]

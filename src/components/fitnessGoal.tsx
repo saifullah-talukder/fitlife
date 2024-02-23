@@ -1,21 +1,22 @@
 import { activityLevelItems, goalItems } from '@/constants/app'
-import { createAxiosClient } from '@/network/createAxiosClient'
+import { AxiosClient } from '@/network/AxiosClient'
 import { NewPlanParams, useCreateNewPlanStore } from '@/stores/useCreateNewPlanStore'
+import { useNewPlanResponseStore } from '@/stores/useNewPlanResponseStore'
 import { useUserInfoStore } from '@/stores/useUserInfoStore'
-import * as Auth from 'aws-amplify/auth'
-import { HTMLAttributes, useMemo } from 'react'
+import { HTMLAttributes, useMemo, useState } from 'react'
 import { MdDoneAll } from 'react-icons/md'
 import { twMerge } from 'tailwind-merge'
-import { z } from 'zod'
+import { string, z } from 'zod'
 import { PrimaryActionButton } from './button'
 import { SelectInputField, TextInputField } from './form'
-import { AxiosClient } from '@/network/AxiosClient'
 
 type FitnessGoalProps = {} & HTMLAttributes<HTMLDivElement>
 
 export default function FitnessGoal(props: FitnessGoalProps) {
   const { params, setNewPlanParam } = useCreateNewPlanStore()
   const { user } = useUserInfoStore()
+  const { setNewPlanResponse, setError } = useNewPlanResponseStore()
+  const [isLoading, setIsLoading] = useState(false)
 
   const isDisabled = useMemo(() => {
     let isDisabled = false
@@ -28,27 +29,15 @@ export default function FitnessGoal(props: FitnessGoalProps) {
   }, [params])
 
   const handleSubmit = async () => {
-    // console.log(JSON.stringify(params))
-    const tokens = await Auth.fetchAuthSession()
-    console.log(tokens?.tokens?.accessToken.toString())
-    // const AxiosClient = createAxiosClient(tokens)
+    setIsLoading(true)
     AxiosClient.post(process.env.NEW_PLAN_API_URL!, {
       userId: user.userId,
       params,
     })
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .then((res: any) => setNewPlanResponse(res))
+      .catch((err: any) => setError(String(err)))
+      .finally(() => setIsLoading(false))
   }
-
-  const printToken = async () => {
-    // console.log(JSON.stringify(params))
-    const tokens = await Auth.fetchAuthSession()
-    // console.log(tokens?.tokens?.accessToken.toString())
-    console.log(tokens)
-    console.log(tokens?.tokens?.idToken?.toString())
-  }
-
-  printToken()
 
   return (
     <div className={twMerge('w-full relative', props.className)}>
@@ -73,7 +62,7 @@ export default function FitnessGoal(props: FitnessGoalProps) {
           isClearable={true}
         />
         <TextInputField
-          label="Target Weight"
+          label="Target Weight (kg)"
           placeholder={`Enter you target wight in kg ...`}
           onTextChange={text => setNewPlanParam('targetWeight', text)}
           size="md"
@@ -91,6 +80,7 @@ export default function FitnessGoal(props: FitnessGoalProps) {
           label="Submit"
           onClick={() => handleSubmit()}
           isDisabled={isDisabled}
+          isLoading={isLoading}
         />
       </div>
     </div>

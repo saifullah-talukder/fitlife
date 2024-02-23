@@ -30,13 +30,6 @@ export default function App(props: AppProps) {
   const [activeTabId, setActiveTabId] = useState<TabID>('create-new-plan')
   const { user, setUserInfo } = useUserInfoStore()
 
-  // const printToken = async () => {
-  //   const token = await Auth.fetchAuthSession()
-  //   console.log(token)
-  // }
-
-  // printToken()
-
   useEffect(() => {
     if (props.user?.signInDetails?.loginId) {
       setUserInfo('email', props.user?.signInDetails?.loginId)

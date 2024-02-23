@@ -44,14 +44,14 @@ export default function PersonalInfo(props: PersonalInfoProps) {
           isClearable={true}
         />
         <TextInputField
-          label="Height"
+          label="Height (cm)"
           placeholder={`Enter you height in cm ...`}
           onTextChange={text => setNewPlanParam('height', text)}
           size="md"
           validationSchema={z.coerce.number()}
         />
         <TextInputField
-          label="Weight"
+          label="Weight (kg)"
           placeholder={`Enter you wight in kg ...`}
           onTextChange={text => setNewPlanParam('weight', text)}
           size="md"

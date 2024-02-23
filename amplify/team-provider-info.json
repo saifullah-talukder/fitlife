@@ -19,7 +19,7 @@
       "function": {
         "newPlan": {
           "deploymentBucketName": "amplify-fitlife-dev-154852-deployment",
-          "s3Key": "amplify-builds/newPlan-47427763546f746a5874-build.zip"
+          "s3Key": "amplify-builds/newPlan-584c4367575972523645-build.zip"
         }
       },
       "storage": {

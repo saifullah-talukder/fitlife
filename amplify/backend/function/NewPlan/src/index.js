@@ -1,6 +1,7 @@
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
 const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb')
 const { v4: uuidv4 } = require('uuid')
+const { getMealPlan, getWorkoutPlan } = require('./plan.service')
 
 const ddbClient = new DynamoDBClient({ region: process.env.TABLE_REGION })
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient)
@@ -37,27 +38,43 @@ exports.handler = async (event, context) => {
 
   const { userId, params } = JSON.parse(event.body)
   const planId = uuidv4()
-  const planItem = { planId, userId, params, plan: { meal: 'eat regularly' } }
-
-  let result = { ...planItem, res: 'Hello from New Plan lambda!' }
-  let statusCode = 200
-
-  const putItemParams = {
-    TableName: tableName,
-    Item: planItem,
-  }
 
   try {
-    const data = await ddbDocClient.send(new PutCommand(putItemParams))
-    result = { ...result, data: data, success: 'post call succeed!' }
-  } catch (err) {
-    statusCode = 500
-    result = { ...result, error: err }
-  }
+    const mealPlan = await getMealPlan(params)
+    const workoutPlan = await getWorkoutPlan(params)
 
-  return {
-    statusCode,
-    headers,
-    body: JSON.stringify(result),
+    const planItem = {
+      planId,
+      userId,
+      params,
+      plan: { meal: mealPlan, workout: workoutPlan },
+      createdAt: string(new Date()),
+    }
+
+    const putItemParams = {
+      TableName: tableName,
+      Item: planItem,
+    }
+
+    try {
+      const data = await ddbDocClient.send(new PutCommand(putItemParams))
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ ...planItem }),
+      }
+    } catch (err) {
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ params, error: err }),
+      }
+    }
+  } catch (err) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ params, error: err }),
+    }
   }
 }
