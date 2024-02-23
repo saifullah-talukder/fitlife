@@ -39,6 +39,8 @@ export default function FitnessGoal(props: FitnessGoalProps) {
       .catch(err => console.log(err))
   }
 
+  console.log(JSON.stringify(params))
+
   return (
     <div className={twMerge('w-full relative', props.className)}>
       <h2 className="text-slate-700 font-medium">{`Your Goal`}</h2>
