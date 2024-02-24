@@ -13,7 +13,7 @@ import { SelectInputField, TextInputField } from './form'
 type FitnessGoalProps = {} & HTMLAttributes<HTMLDivElement>
 
 export default function FitnessGoal(props: FitnessGoalProps) {
-  const { params, setNewPlanParam } = useCreateNewPlanStore()
+  const { params, validation, setNewPlanParam } = useCreateNewPlanStore()
   const { user } = useUserInfoStore()
   const { setNewPlanResponse, setError } = useNewPlanResponseStore()
   const [isLoading, setIsLoading] = useState(false)
@@ -25,8 +25,8 @@ export default function FitnessGoal(props: FitnessGoalProps) {
         isDisabled = true
       }
     })
-    return isDisabled
-  }, [params])
+    return isDisabled || !validation.isValid
+  }, [params, validation.isValid])
 
   const handleSubmit = async () => {
     setIsLoading(true)

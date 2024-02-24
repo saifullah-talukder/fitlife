@@ -1,3 +1,4 @@
+import { useCreateNewPlanStore } from '@/stores/useCreateNewPlanStore'
 import { useNewPlanResponseStore } from '@/stores/useNewPlanResponseStore'
 import { HTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -10,6 +11,7 @@ type CreateNewPlanProps = HTMLAttributes<HTMLDivElement> & {}
 
 export default function CreateNewPlan(props: CreateNewPlanProps) {
   const { response, error, setEmpty } = useNewPlanResponseStore()
+  const { validation } = useCreateNewPlanStore()
 
   if (!!error) {
     return <p className="text-center text-red-500">{error}</p>
@@ -18,16 +20,24 @@ export default function CreateNewPlan(props: CreateNewPlanProps) {
   return (
     <>
       {!!response.planId ? (
-        <div className="w-full relative">
+        <div className={twMerge('w-full relative', props.className)}>
           <PlanCardDetails plan={response} />
           <div className="h-14"></div>
           <PrimaryActionButton className="absolute right-0 bottom-0" label="Make Another Plan" onClick={setEmpty} />
         </div>
       ) : (
-        <div className={twMerge('grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 pt-4 gap-4', props.className)}>
-          <PersonalInfo />
-          <div className="hidden xl:block"></div>
-          <FitnessGoal />
+        <div className={twMerge('w-full pt-4', props.className)}>
+          {!validation.isValid && (
+            <p className="text-xs md:text-sm text-red-500">
+              <span className="font-semibold">Error: </span>
+              {validation.errorMessage}
+            </p>
+          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-2">
+            <PersonalInfo />
+            <div className="hidden xl:block"></div>
+            <FitnessGoal />
+          </div>
         </div>
       )}
     </>
