@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       headers,
-      body: JSON.stringify('HTTP method not allowed'),
+      body: JSON.stringify({ errorMessage: 'HTTP method not allowed' }),
     }
   }
 
@@ -30,11 +30,19 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       headers,
-      body: JSON.stringify('Resource path not allowed'),
+      body: JSON.stringify({ errorMessage: 'Resource path not allowed' }),
     }
   }
 
   const { userId } = event.queryStringParameters
+
+  if (!userId) {
+    return {
+      statusCode: 400,
+      headers,
+      body: JSON.stringify({ errorMessage: 'A valid userId must be provided as request parameter' }),
+    }
+  }
 
   try {
     const scanItemsParams = {
@@ -62,7 +70,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ params, error: String(err) }),
+      body: JSON.stringify({ error: String(err) }),
     }
   }
 }

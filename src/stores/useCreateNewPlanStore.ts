@@ -66,12 +66,12 @@ export const useCreateNewPlanStore = create<NewPlanStore>()(
 function validateParams(params: NewPlanParams): ParamsValidation {
   const validation = { errorMessage: '', isValid: true }
 
-  if (params.birthDate && new Date(params.birthDate) > new Date()) {
+  if (!!params.birthDate && new Date(params.birthDate) > new Date()) {
     validation.errorMessage = `Birth date can not be after this day. `
     validation.isValid = false
   }
 
-  if (params.goal && params.targetWeight && params.weight) {
+  if (!!params.goal && !!params.targetWeight && !!params.weight) {
     if (params.goal === 'gain' && params.weight >= params.targetWeight) {
       validation.errorMessage = `${validation.errorMessage}Target weight must be higher than current weight if you goal is to gain weight. `
       validation.isValid = false

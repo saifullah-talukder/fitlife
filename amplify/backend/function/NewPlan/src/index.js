@@ -2,6 +2,7 @@ const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
 const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb')
 const { v4: uuidv4 } = require('uuid')
 const { getMealPlan, getWorkoutPlan } = require('./plan.service')
+const { validateParams } = require('./plan.validation')
 
 const ddbClient = new DynamoDBClient({ region: process.env.TABLE_REGION })
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient)
@@ -24,7 +25,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       headers,
-      body: JSON.stringify('HTTP method not allowed'),
+      body: JSON.stringify({ errorMessage: 'HTTP method not allowed' }),
     }
   }
 
@@ -32,11 +33,22 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       headers,
-      body: JSON.stringify('Resource path not allowed'),
+      body: JSON.stringify({ errorMessage: 'Resource path not allowed' }),
     }
   }
 
   const { userId, params } = JSON.parse(event.body)
+  const validation = validateParams(params)
+  if (!userId || !validation.isValid) {
+    return {
+      statusCode: 400,
+      headers,
+      body: JSON.stringify({
+        errorMessage: `${!userId ? 'A valid userId must be provided. ' : ''}${validation.errorMessage}`,
+      }),
+    }
+  }
+
   const planId = uuidv4()
 
   try {
