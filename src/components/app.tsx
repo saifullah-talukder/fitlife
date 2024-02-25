@@ -1,5 +1,6 @@
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { AxiosClient } from '@/network/AxiosClient'
+import { useNewPlanResponseStore } from '@/stores/useNewPlanResponseStore'
 import { useUserInfoStore } from '@/stores/useUserInfoStore'
 import { UseAuthenticator } from '@aws-amplify/ui-react-core'
 import { AuthUser } from 'aws-amplify/auth'
@@ -32,6 +33,7 @@ const tabItems = [
 export default function App(props: AppProps) {
   const [activeTabId, setActiveTabId] = useState<TabID>('create-new-plan')
   const { user, setUserInfo } = useUserInfoStore()
+  const { setEmpty: setNewPlanResponseEmpty } = useNewPlanResponseStore()
   const [isHistoryLoading, setIsHistoryLoading] = useState(false)
   const [historyError, setHistoryError] = useState('')
   const [plans, setPlans] = useState([])
@@ -54,12 +56,20 @@ export default function App(props: AppProps) {
     }
   }, [props.user])
 
+  useEffect(() => {
+    setFetchFlag(prev => prev + 1)
+    setNewPlanResponseEmpty()
+    setPlans([])
+  }, [props.user?.userId])
+
   const fetchPlans = async () => {
-    setIsHistoryLoading(true)
-    AxiosClient.get(`${process.env.PLAN_API_URL}/list?userId=${user.userId}`)
-      .then((res: any) => setPlans(res.data.plans.reverse()))
-      .catch((err: any) => setHistoryError(String(err)))
-      .finally(() => setIsHistoryLoading(false))
+    if (!!user.userId) {
+      setIsHistoryLoading(true)
+      AxiosClient.get(`${process.env.PLAN_API_URL}/list?userId=${user.userId}`)
+        .then((res: any) => setPlans(res.data.plans.reverse()))
+        .catch((err: any) => setHistoryError(String(err)))
+        .finally(() => setIsHistoryLoading(false))
+    }
   }
 
   return (
@@ -72,6 +82,7 @@ export default function App(props: AppProps) {
           if (props.signOut) {
             props.signOut()
           }
+          setUserInfo('userId', undefined)
         }}
       />
       <div className="flex gap-x-4 items-center justify-center">
