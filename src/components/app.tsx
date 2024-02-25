@@ -95,7 +95,7 @@ export default function App(props: AppProps) {
       </div>
 
       <p className="text-center text-sm md:text-base text-slate-700 mt-2 mx-2 md:mx-10">
-        We are here to help with amazing nutrition and workout plans so than you can live a healthy and fullfilling
+        We are here to help you with amazing nutrition and workout plans so than you can live a healthy and fullfilling
         life!
       </p>
 
