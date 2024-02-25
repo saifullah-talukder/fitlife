@@ -10,11 +10,24 @@ import { PlanCardDetails } from './planCard'
 type CreateNewPlanProps = HTMLAttributes<HTMLDivElement> & {}
 
 export default function CreateNewPlan(props: CreateNewPlanProps) {
-  const { response, error, setEmpty } = useNewPlanResponseStore()
+  const { response, error, setEmpty, setError } = useNewPlanResponseStore()
   const { validation } = useCreateNewPlanStore()
 
   if (!!error) {
-    return <p className="text-center text-red-500">{error}</p>
+    return (
+      <div>
+        <p className="text-center text-red-500">{error}</p>
+        <div className="flex justify-center mt-4">
+          <PrimaryActionButton
+            label="Make Another Plan"
+            onClick={() => {
+              setEmpty()
+              setError('')
+            }}
+          />
+        </div>
+      </div>
+    )
   }
 
   return (

@@ -1,10 +1,8 @@
 {
-  "planId": "planId123",
-  "userId": "userId123",
-  "plan": {
-    "todo": "this is a plan"
+  "httpMethod": "POST",
+  "path": "/plan/new",
+  "headers": {
+    "Content-Type": "application/json"
   },
-  "params": {
-    "age": "24"
-  }
+  "body": "{\"userId\": \"04f8d488-d021-701a-070f-8e85244a1da2\", \"params\": { \"birthDate\": \"Thu Feb 19 1987 12:00:00 GMT+0600 (Bangladesh Standard Time)\", \"sex\": \"female\", \"country\": \"Afghanistan\", \"height\": \"180\", \"weight\": \"60\", \"goal\": \"gain\", \"activityLevel\": \"very light\", \"targetWeight\": \"75\", \"pastFailureReason\": \"I am very lazy!\" }}"
 }

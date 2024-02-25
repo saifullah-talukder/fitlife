@@ -1,4 +1,4 @@
-import { isValid } from 'date-fns'
+const { isValid } = require('date-fns')
 
 function validateParams(params) {
   const validation = { errorMessage: '', isValid: true }
