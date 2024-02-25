@@ -91,7 +91,7 @@ export default function App(props: AppProps) {
       <div className="mt-4 mx-4 md:mx-20 lg:mx-40 xl:mx-60 rounded-xl bg-white p-4">
         <TabMenu activeTabId={activeTabId} items={tabItems} onTabClick={tabId => setActiveTabId(tabId)} />
         {activeTabId === 'create-new-plan' ? (
-          <CreateNewPlan />
+          <CreateNewPlan setFetchFlag={setFetchFlag} />
         ) : (
           <History setFetchFlag={setFetchFlag} plans={plans} isLoading={isHistoryLoading} error={historyError} />
         )}

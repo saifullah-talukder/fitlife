@@ -1,13 +1,15 @@
 import { useCreateNewPlanStore } from '@/stores/useCreateNewPlanStore'
 import { useNewPlanResponseStore } from '@/stores/useNewPlanResponseStore'
-import { HTMLAttributes } from 'react'
+import { Dispatch, HTMLAttributes, SetStateAction } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { PrimaryActionButton } from './button'
 import FitnessGoal from './fitnessGoal'
 import PersonalInfo from './personalInfo'
 import { PlanCardDetails } from './planCard'
 
-type CreateNewPlanProps = HTMLAttributes<HTMLDivElement> & {}
+type CreateNewPlanProps = {
+  setFetchFlag: Dispatch<SetStateAction<number>>
+} & HTMLAttributes<HTMLDivElement>
 
 export default function CreateNewPlan(props: CreateNewPlanProps) {
   const { response, error, setEmpty, setError } = useNewPlanResponseStore()
@@ -49,7 +51,7 @@ export default function CreateNewPlan(props: CreateNewPlanProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-2">
             <PersonalInfo />
             <div className="hidden xl:block"></div>
-            <FitnessGoal />
+            <FitnessGoal setFetchFlag={props.setFetchFlag} />
           </div>
         </div>
       )}

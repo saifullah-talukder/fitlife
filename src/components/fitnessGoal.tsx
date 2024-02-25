@@ -3,14 +3,16 @@ import { AxiosClient } from '@/network/AxiosClient'
 import { NewPlanParams, useCreateNewPlanStore } from '@/stores/useCreateNewPlanStore'
 import { useNewPlanResponseStore } from '@/stores/useNewPlanResponseStore'
 import { useUserInfoStore } from '@/stores/useUserInfoStore'
-import { HTMLAttributes, useMemo, useState } from 'react'
+import { Dispatch, HTMLAttributes, SetStateAction, useMemo, useState } from 'react'
 import { MdDoneAll } from 'react-icons/md'
 import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
 import { PrimaryActionButton } from './button'
 import { SelectInputField, TextInputField } from './form'
 
-type FitnessGoalProps = {} & HTMLAttributes<HTMLDivElement>
+type FitnessGoalProps = {
+  setFetchFlag: Dispatch<SetStateAction<number>>
+} & HTMLAttributes<HTMLDivElement>
 
 export default function FitnessGoal(props: FitnessGoalProps) {
   const { params, validation, setNewPlanParam } = useCreateNewPlanStore()
@@ -34,7 +36,10 @@ export default function FitnessGoal(props: FitnessGoalProps) {
       userId: user.userId,
       params,
     })
-      .then((res: any) => setNewPlanResponse(res.data))
+      .then((res: any) => {
+        setNewPlanResponse(res.data)
+        props.setFetchFlag(prev => prev + 1)
+      })
       .catch((err: any) => setError(String(err)))
       .finally(() => setIsLoading(false))
   }
