@@ -45,6 +45,8 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         errorMessage: `${!userId ? 'A valid userId must be provided. ' : ''}${validation.errorMessage}`,
+        userId,
+        params,
       }),
     }
   }
